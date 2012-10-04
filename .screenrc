@@ -1,0 +1,9 @@
+startup_message off
+nethack on
+deflogin on
+autodetach on
+vbell off
+defscrollback 1024
+shell -bash
+termcapinfo xterm* ti@:te@
+hardstatus string "%h (%n)"
