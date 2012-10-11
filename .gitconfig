@@ -1,0 +1,21 @@
+[user]
+	email = cat@vv.carleton.ca
+[color]
+        ui = false
+        diff = true
+[diff "color"]
+        new = bold green
+        old = bold red
+        frag = bold yellow
+        meta = bold white blue
+        whitespace = bold magenta white
+[diff]
+        renamelimit = 1000
+
+[sendemail]
+	smtpencryption = ssl
+	smtpserver = smtp.gmail.com
+	smtpserverport = 465
+	smtpuser = cronos586
+	chainreplyto = false
+	confirm = auto
