@@ -109,4 +109,6 @@ else
   export PS1='\[\e]0;\h:\w\a\]\w\[\e[1;32m\]\$\[\e[0m\] '
 fi
 
+alias jobs='jobs -l'
+
 [ -s $HOME/.bashrc_local ] && . $HOME/.bashrc_local
