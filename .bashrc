@@ -109,4 +109,6 @@ else
   export PS1='\[\e]0;\h:\w\a\]\w\[\e[1;32m\]\$\[\e[0m\] '
 fi
 
+alias gbd='for k in `git branch -a|perl -pe s/^..//`;do echo -e `git show --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" $k|head -n 1`\\t$k;done|sort -r'
+
 [ -s $HOME/.bashrc_local ] && . $HOME/.bashrc_local
