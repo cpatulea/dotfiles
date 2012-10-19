@@ -2,4 +2,4 @@
 --color
 --color-match=bold red
 --pager=less -R
---type-add=make2=.mk
+--type-set=make2=.mk
