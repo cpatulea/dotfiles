@@ -3,3 +3,4 @@
 --color-match=bold red
 --pager=less -R
 --type-set=make2=.mk
+--type-set=patch=.patch

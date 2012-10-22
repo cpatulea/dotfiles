@@ -19,4 +19,8 @@
 	smtpserverport = 465
 	smtpuser = cronos586
 	chainreplyto = false
-	confirm = auto
+	confirm = always
+
+[format]
+	signoff = true
+
