@@ -109,6 +109,7 @@ else
   PS1='\w'
 fi
 
+# Prompt
 PS1="$PS1\[\e[1;32m\]\$\[\e[0m\] "
 
 if [[ "$TERM" = xterm || "$TERM" = screen ]]; then
@@ -149,5 +150,7 @@ xtime() {
     cat time.joined
     rm -f time.joined
 }
+
+alias gbd='for k in `git branch -a|perl -pe s/^..//`;do echo -e `git show --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" $k|head -n 1`\\t$k;done|sort -r'
 
 [ -s $HOME/.bashrc_local ] && . $HOME/.bashrc_local
