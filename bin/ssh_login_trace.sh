@@ -18,18 +18,25 @@ SSHD_PID=$(pgrep -P $SUDO_PID sshd)
 
 sleep 1  # let sshd settle
 
-sudo strace -f -p $SSHD_PID -o ssh_login_trace.txt &
+sudo strace -tt -T -f -p $SSHD_PID -o ssh_login_trace.txt &
 STRACE_PID=$!
 
 sleep 0.1  # let strace settle
 
-sleep 3 | ssh -S none localhost &
-SSH_PID=$!
+# fool ssh into thinking it has a terminal
+unbuffer ssh -S none localhost &
+UNBUFFER_PID=$!
 
-# ssh will exit in about 3 seconds
+# let script spawn ssh
+sleep 0.1
+
+SSH_PID=$(pgrep -P $UNBUFFER_PID ssh)
+
+sleep 3
+
+kill -HUP $SSH_PID
 wait $SSH_PID
-
-sudo kill -INT $STRACE_PID
+wait $UNBUFFER_PID
 
 # ssh is dead. strace was killed and will exit soon. sshd will see connection
 # reset and die soon, then sudo will die.
