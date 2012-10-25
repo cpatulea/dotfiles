@@ -103,13 +103,13 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
+# Prompt
 if [[ "$debian_chroot" ]]; then
   PS1='$debian_chroot:\w'
 else
   PS1='\w'
 fi
 
-# Prompt
 PS1="$PS1\[\e[1;32m\]\$\[\e[0m\] "
 
 if [[ "$TERM" = xterm || "$TERM" = screen ]]; then
