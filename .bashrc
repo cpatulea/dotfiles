@@ -119,4 +119,35 @@ export PS1
 
 alias jobs='jobs -l'
 
+# time(shell) a command 5 times and arrange the results horizontally.
+#
+# Example output:
+# $ xtime sleep 1
+#
+# real 0m1.002s 0m1.002s 0m1.002s 0m1.002s 0m1.002s
+# user 0m0.000s 0m0.000s 0m0.000s 0m0.000s 0m0.000s
+# sys 0m0.000s 0m0.000s 0m0.000s 0m0.000s 0m0.000s
+#
+# Bug:
+#   Doesn't handle shell builtins in $@.
+xtime() {
+    local joined new
+
+    echo -e "\nreal\nuser\nsys\n" >time.joined
+
+    for TRIAL in $(seq 1 5); do
+        local trial_time
+
+        # From http://mywiki.wooledge.org/BashFAQ/032
+        exec 3>&1 4>&2
+        { time "$@" 1>&3 2>&4; } 2>&1 | join -j 1 time.joined - >time.new
+        exec 3>&- 4>&-
+
+        mv time.new time.joined
+    done
+
+    cat time.joined
+    rm -f time.joined
+}
+
 [ -s $HOME/.bashrc_local ] && . $HOME/.bashrc_local
