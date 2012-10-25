@@ -103,11 +103,19 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-if [ ! -z "$debian_chroot" ]; then
-  export PS1='\[\e]0;\h:\w\a\]$debian_chroot:\w\[\e[1;32m\]\$\[\e[0m\] '
+if [[ "$debian_chroot" ]]; then
+  PS1='$debian_chroot:\w'
 else
-  export PS1='\[\e]0;\h:\w\a\]\w\[\e[1;32m\]\$\[\e[0m\] '
+  PS1='\w'
 fi
+
+PS1="$PS1\[\e[1;32m\]\$\[\e[0m\] "
+
+if [[ "$TERM" = xterm || "$TERM" = screen ]]; then
+  PS1="\[\e]0;\h:\w\a\]$PS1"
+fi
+
+export PS1
 
 alias jobs='jobs -l'
 
