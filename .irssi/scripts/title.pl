@@ -52,13 +52,7 @@ sub refresh_topic {
 sub special_var {
    my($str) = @_;
 
-   my($begin,$end);
-   if($str =~ s/^\.//) {
-	  $begin = ' [';
-      $end = ']';
-   }else{
-	  $begin = $end = '';
-   }
+   $str =~ s/^\.//;
 
    my $result;
    if($str eq 'topic') {
@@ -73,9 +67,7 @@ sub special_var {
 	  $result = $item->parse_special('$' . $str);
    }
 
-   $begin = '(+', $end = ')' if $str eq 'M' && $begin;
-
-   return $result ? $begin . $result . $end : '';
+   return $result;
 }
 
 sub topic_str {
@@ -102,7 +94,7 @@ sub act_str {
              }
 	       }
    }
-   return join(',',@acts);
+   return join(',', sort {$a <=> $b} @acts);
 }
 
 sub topic_changed {
@@ -114,16 +106,12 @@ sub topic_changed {
    refresh_topic();
 }
 
-sub hilight_win {
-   refresh_topic();
-}
-
 Irssi::signal_add_last('window changed', 'refresh_topic');
 Irssi::signal_add_last('window item changed', 'refresh_topic');
 Irssi::signal_add_last('window server changed', 'refresh_topic');
 Irssi::signal_add_last('server nick changed', 'refresh_topic');
 Irssi::signal_add_last('channel topic changed', 'topic_changed');
-Irssi::signal_add_last('window hilight', 'hilight_win');
+Irssi::signal_add_last('window hilight', 'refresh_topic');
 Irssi::signal_add_last('setup changed', 'refresh_topic');
 
 Irssi::settings_add_str('misc', 'title_string', 'Irssi: [$N@$tag]$.C$.winname$.act');
