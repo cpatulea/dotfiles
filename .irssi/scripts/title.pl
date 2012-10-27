@@ -29,7 +29,7 @@ $VERSION = "3.2";
 # Nickname with usermode
 # /set title_string $N(+$usermode)
 
-my %act;
+use Data::Dumper;
 use IO::Handle;
 
 sub xterm_topic {
@@ -95,22 +95,14 @@ sub topic_str {
 
 sub act_str {
    my @acts;
-   for my $winref(keys %act) {
-      # handle windows with items and not gracefully
-      my $window = Irssi::window_find_refnum($winref);
-      if(defined($window)) {
+   foreach my $window (Irssi::windows()) {
          for my $win ($window->items or $window) {
-	          if($win->{data_level} >= 3 || $win->{data_lev} >= 3) {
-	              push(@acts,$win->{name});
-             } else {
-		           delete($act{$winref});
+	          if($win->{data_level} >= 2) {
+	              push(@acts,$window->{refnum});
              }
 	       }
-      } else {
-		   delete($act{$winref});
-	   }
    }
-   return join(', ',@acts);
+   return join(',',@acts);
 }
 
 sub topic_changed {
@@ -123,10 +115,6 @@ sub topic_changed {
 }
 
 sub hilight_win {
-   my($win) = @_;
-   return unless ref $win && $win->{data_level} >= 3;
-   $act{$win->{refnum}}++;
-
    refresh_topic();
 }
 
