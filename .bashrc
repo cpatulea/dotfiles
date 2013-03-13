@@ -153,4 +153,7 @@ xtime() {
 
 alias gbd='for k in `git branch -a|perl -pe s/^..//`;do echo -e `git show --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" $k|head -n 1`\\t$k;done|sort -r'
 
+# Equivalent to ls --block-size="'1"
+export BLOCK_SIZE="'1"
+
 [ -s $HOME/.bashrc_local ] && . $HOME/.bashrc_local
