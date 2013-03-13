@@ -156,4 +156,8 @@ alias gbd='for k in `git branch -a|perl -pe s/^..//`;do echo -e `git show --pret
 # Equivalent to ls --block-size="'1"
 export BLOCK_SIZE="'1"
 
+# git uses /usr/bin/editor by default, which in Ubuntu points to nano by
+# default.
+export EDITOR="vim"
+
 [ -s $HOME/.bashrc_local ] && . $HOME/.bashrc_local
