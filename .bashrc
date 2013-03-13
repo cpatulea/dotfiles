@@ -73,7 +73,7 @@ esac
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
+    alias ls="ls --color=auto --block-size=\'1"
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
@@ -152,6 +152,7 @@ xtime() {
 }
 
 alias gbd='for k in `git branch -a|perl -pe s/^..//`;do echo -e `git show --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" $k|head -n 1`\\t$k;done|sort -r'
+alias q='quilt'
 
 # Equivalent to ls --block-size="'1"
 export BLOCK_SIZE="'1"
