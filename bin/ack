@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 [[ "$ACK_OPTIONS" ]] && {
 	echo "ack: ACK_OPTIONS already set - conflicts with per-dir .ackrc" >&2
