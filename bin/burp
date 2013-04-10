@@ -1,3 +1,2 @@
-#!/bin/bash
-set -ex
-exec java -jar $(dirname $0)/../src/burpsuite_free_v1.5.jar
+#!/bin/sh
+exec java -jar "$(dirname $0)/../src/burpsuite_free_v1.5.jar"
