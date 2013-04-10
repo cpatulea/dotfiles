@@ -1,0 +1,5 @@
+--sort-files
+--color
+--color-match=bold red
+--pager=less -R
+--type-set=go=.go
