@@ -1,6 +1,5 @@
 [user]
-	name = Catalin Patulea
-	email = cat@vv.carleton.ca
+	email = catalinp@google.com
 [color]
         ui = false
         diff = true
@@ -12,11 +11,3 @@
         whitespace = bold magenta white
 [diff]
         renamelimit = 1000
-
-[sendemail]
-	smtpencryption = ssl
-	smtpserver = smtp.gmail.com
-	smtpserverport = 465
-	smtpuser = cronos586
-	chainreplyto = false
-	confirm = auto
