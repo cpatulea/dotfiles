@@ -152,12 +152,14 @@ xtime() {
 }
 
 alias gbd='for k in `git branch -a|perl -pe s/^..//`;do echo -e `git show --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" $k|head -n 1`\\t$k;done|sort -r'
+alias gs='git status'
+alias grh='git reset --hard HEAD'
 alias q='quilt'
 
 # git uses /usr/bin/editor by default, which in Ubuntu points to nano by
 # default.
 export EDITOR="vim"
 
-export PYTHONPATH=$HOME/src/scrapy:$HOME/src/w3lib
+export PYTHONPATH="$HOME/src/scrapy:$HOME/src/w3lib"
 
 [ -s $HOME/.bashrc_local ] && . $HOME/.bashrc_local
