@@ -23,6 +23,3 @@
 
 [format]
 	signoff = true
-
-[push]
-	default = simple
