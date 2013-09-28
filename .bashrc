@@ -165,3 +165,8 @@ export EDITOR="vim"
 export PYTHONPATH="$HOME/src/scrapy:$HOME/src/w3lib"
 
 [ -s $HOME/.bashrc_local ] && . $HOME/.bashrc_local
+
+[ -d /usr/local/plan9 ] && {
+  export PLAN9=/usr/local/plan9
+  export PATH=$PATH:$PLAN9/bin
+}
