@@ -110,10 +110,12 @@ else
   PS1='\w'
 fi
 
-PS1="$PS1\[\e[1;32m\]\$\[\e[0m\] "
+if [[ "$TERM" = linux || "$TERM" = xterm || "$TERM" = screen ]]; then
+  PS1="$PS1\[\e[1;32m\]\$\[\e[0m\] "
 
-if [[ "$TERM" = xterm || "$TERM" = screen ]]; then
-  PS1="\[\e]0;\h:\w\a\]$PS1"
+   if [[ "$TERM" = xterm || "$TERM" = screen ]]; then
+    PS1="\[\e]0;\h:\w\a\]$PS1"
+  fi
 fi
 
 export PS1
