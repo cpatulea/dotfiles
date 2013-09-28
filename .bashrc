@@ -170,3 +170,6 @@ export PYTHONPATH="$HOME/src/scrapy:$HOME/src/w3lib"
   export PLAN9=/usr/local/plan9
   export PATH=$PATH:$PLAN9/bin
 }
+
+export LESS="-IRS"
+
