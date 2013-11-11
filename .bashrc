@@ -13,8 +13,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=1000000
+HISTFILESIZE=2000000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -72,7 +72,7 @@ esac
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
+    alias ls="ls --color=auto --block-size=\'1"
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
@@ -105,3 +105,73 @@ fi
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
+
+# Prompt
+if [[ "$debian_chroot" ]]; then
+  PS1='$debian_chroot:\w'
+else
+  PS1='\w'
+fi
+
+if [[ "$TERM" = linux || "$TERM" = xterm || "$TERM" = screen ]]; then
+  PS1="$PS1\[\e[1;32m\]\$\[\e[0m\] "
+
+   if [[ "$TERM" = xterm || "$TERM" = screen ]]; then
+    PS1="\[\e]0;\h:\w\a\]$PS1"
+  fi
+fi
+
+export PS1
+
+alias jobs='jobs -l'
+
+# time(shell) a command 5 times and arrange the results horizontally.
+#
+# Example output:
+# $ xtime sleep 1
+#
+# real 0m1.002s 0m1.002s 0m1.002s 0m1.002s 0m1.002s
+# user 0m0.000s 0m0.000s 0m0.000s 0m0.000s 0m0.000s
+# sys 0m0.000s 0m0.000s 0m0.000s 0m0.000s 0m0.000s
+#
+# Bug:
+#   Doesn't handle shell builtins in $@.
+xtime() {
+    local joined new
+
+    echo -e "\nreal\nuser\nsys\n" >time.joined
+
+    for TRIAL in $(seq 1 5); do
+        local trial_time
+
+        # From http://mywiki.wooledge.org/BashFAQ/032
+        exec 3>&1 4>&2
+        { time "$@" 1>&3 2>&4; } 2>&1 | join -j 1 time.joined - >time.new
+        exec 3>&- 4>&-
+
+        mv time.new time.joined
+    done
+
+    cat time.joined
+    rm -f time.joined
+}
+
+alias gbd='for k in `git branch -a|perl -pe s/^..//`;do echo -e `git show --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" $k|head -n 1`\\t$k;done|sort -r'
+alias gs='git status'
+alias grh='git reset --hard HEAD'
+alias q='quilt'
+
+# git uses /usr/bin/editor by default, which in Ubuntu points to nano by
+# default.
+export EDITOR="vim"
+
+export PYTHONPATH="$HOME/src/scrapy:$HOME/src/w3lib"
+
+[ -s $HOME/.bashrc_local ] && . $HOME/.bashrc_local
+
+[ -d /usr/local/plan9 ] && {
+  export PLAN9=/usr/local/plan9
+  export PATH=$PATH:$PLAN9/bin
+}
+
+export LESS="-IRS"

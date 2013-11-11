@@ -1,0 +1,11 @@
+#!/bin/bash
+
+[[ "$ACK_OPTIONS" ]] && {
+	echo "ack: ACK_OPTIONS already set - conflicts with per-dir .ackrc" >&2
+	exit 1
+}
+
+# Collect ACK_OPTIONS from cwd for things like per-directory --ignore-dirs.
+[ -r .ackrc ] && export ACK_OPTIONS="$(tr '\n' ' ' < .ackrc)"
+
+exec /usr/bin/ack-grep "$@"
