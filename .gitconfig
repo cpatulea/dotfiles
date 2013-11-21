@@ -1,29 +1,29 @@
 [user]
-	name = Catalin Patulea
-	email = cat@vv.carleton.ca
+  name = Catalin Patulea
+  email = cat@vv.carleton.ca
 [log]
-	decorate = true
+  decorate = true
 [color]
-        ui = true
-        diff = true
+  ui = true
+  diff = true
 [diff "color"]
-        new = bold green
-        old = bold red
-        frag = bold yellow
-        meta = bold white blue
-        whitespace = bold magenta white
+  new = bold green
+  old = bold red
+  frag = bold yellow
+  meta = bold white blue
+  whitespace = bold magenta white
 [diff]
-        renamelimit = 1000
+  renamelimit = 1000
 
 [sendemail]
-	smtpencryption = ssl
-	smtpserver = smtp.gmail.com
-	smtpserverport = 465
-	smtpuser = cronos586
-	chainreplyto = false
-	confirm = always
+  smtpencryption = ssl
+  smtpserver = smtp.gmail.com
+  smtpserverport = 465
+  smtpuser = cronos586
+  chainreplyto = false
+  confirm = always
 
 [format]
-	signoff = true
+  signoff = true
 [push]
-	default = current
+  default = current
