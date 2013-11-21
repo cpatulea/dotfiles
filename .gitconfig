@@ -1,8 +1,10 @@
 [user]
 	name = Catalin Patulea
 	email = cat@vv.carleton.ca
+[log]
+	decorate = true
 [color]
-        ui = false
+        ui = true
         diff = true
 [diff "color"]
         new = bold green
