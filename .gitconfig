@@ -1,6 +1,8 @@
 [user]
   name = Catalin Patulea
   email = cat@vv.carleton.ca
+[alias]
+  l = "log --stat --graph"
 [log]
   decorate = true
 [color]
