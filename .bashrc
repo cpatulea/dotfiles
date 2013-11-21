@@ -71,10 +71,12 @@ fi
 
 # Prompt
 if [[ "$debian_chroot" ]]; then
-  PS1='$debian_chroot:\w'
+  PS1="$debian_chroot:"
 else
-  PS1='\w'
+  PS1=""
 fi
+
+PS1="$PS1\$(dirs | tac -s ' ' | tr '\n' ' ' | sed 's/ $//')"
 
 if [[ "$TERM" = linux || "$TERM" = xterm || "$TERM" = screen ]]; then
   PS1="$PS1\[\e[1;32m\]\$\[\e[0m\] "
