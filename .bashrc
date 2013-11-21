@@ -5,10 +5,9 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# don't put duplicate lines in the history. See bash(1) for more options
-# ... or force ignoredups and ignorespace
-#HISTCONTROL=ignoredups:ignorespace
-HISTCONTROL=ignoredups
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
 
 # append to the history file, don't overwrite it
 shopt -s histappend
@@ -83,9 +82,13 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-#alias ll='ls -alF'
-#alias la='ls -A'
-#alias l='ls -CF'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -110,10 +113,12 @@ else
   PS1='\w'
 fi
 
-PS1="$PS1\[\e[1;32m\]\$\[\e[0m\] "
+if [[ "$TERM" = linux || "$TERM" = xterm || "$TERM" = screen ]]; then
+  PS1="$PS1\[\e[1;32m\]\$\[\e[0m\] "
 
-if [[ "$TERM" = xterm || "$TERM" = screen ]]; then
-  PS1="\[\e]0;\h:\w\a\]$PS1"
+   if [[ "$TERM" = xterm || "$TERM" = screen ]]; then
+    PS1="\[\e]0;\h:\w\a\]$PS1"
+  fi
 fi
 
 export PS1
@@ -166,3 +171,10 @@ export PATH="$PATH:$GOROOT/bin"
 export GOPATH="$HOME/src/gopath"
 
 [ -s $HOME/.bashrc_local ] && . $HOME/.bashrc_local
+
+[ -d /usr/local/plan9 ] && {
+  export PLAN9=/usr/local/plan9
+  export PATH=$PATH:$PLAN9/bin
+}
+
+export LESS="-IRS"
