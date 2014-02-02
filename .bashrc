@@ -162,4 +162,6 @@ export EDITOR="vim"
 
 export PYTHONPATH="$HOME/src/scrapy:$HOME/src/w3lib"
 
+export SSHFS='-o auto_cache,intr,umask=0077,sshfs_debug'
+
 [ -s $HOME/.bashrc_local ] && . $HOME/.bashrc_local
