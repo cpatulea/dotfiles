@@ -4,6 +4,6 @@ deflogin on
 autodetach on
 vbell off
 defscrollback 1024
-shell -bash
+shell -/bin/bash
 termcapinfo xterm* ti@:te@
 hardstatus string "%h (%n)"
