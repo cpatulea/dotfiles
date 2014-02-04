@@ -2,7 +2,7 @@
   name = Catalin Patulea
   email = cat@vv.carleton.ca
 [alias]
-  l = "log --stat --graph"
+  l = "log --stat --graph -M"
 [log]
   decorate = true
 [color]
