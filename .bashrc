@@ -137,7 +137,7 @@ export GOPATH="$HOME/src/gopath"
 
 [ -s $HOME/.bashrc_local ] && . $HOME/.bashrc_local
 
-[ -d /usr/local/plan9 ] && {
+false && [ -d /usr/local/plan9 ] && {
   export PLAN9=/usr/local/plan9
   export PATH=$PATH:$PLAN9/bin
 }
