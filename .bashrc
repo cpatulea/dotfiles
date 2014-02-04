@@ -76,15 +76,26 @@ else
   PS1=""
 fi
 
+if ! type -t tac &>/dev/null; then
+  tac() {
+    tail -r
+  }
+fi
+
 PS1="$PS1\$(dirs | tac -s ' ' | tr '\n' ' ' | sed 's/ $//')"
 
-if [[ "$TERM" = linux || "$TERM" = xterm || "$TERM" = screen ]]; then
+case "$TERM" in
+linux|xterm*|screen)
   PS1="$PS1\[\e[1;32m\]\$\[\e[0m\] "
 
    if [[ "$TERM" = xterm || "$TERM" = screen ]]; then
     PS1="\[\e]0;\h:\w\a\]$PS1"
   fi
-fi
+  ;;
+*)
+  PS1="$PS1\$ "
+  ;;
+esac
 
 export PS1
 
