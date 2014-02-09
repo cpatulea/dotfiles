@@ -154,4 +154,4 @@ false && [ -d /usr/local/plan9 ] && {
   export PATH=$PATH:$PLAN9/bin
 }
 
-export LESS="-IRS"
+export LESS="-IRSM"
