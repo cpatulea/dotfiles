@@ -1,2 +1,18 @@
+[extensions]
+hgext.patchbomb =
+
 [ui]
 username = Catalin Patulea <cat@vv.carleton.ca>
+
+[email]
+method = smtp
+from = Catalin Patulea <cat@vv.carleton.ca>
+
+[smtp]
+host = smtp.gmail.com
+username = cronos586@gmail.com
+port = 587
+tls = true
+
+[web]
+cacerts = ~/.hg/dummycert.pem
