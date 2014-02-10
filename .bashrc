@@ -156,6 +156,9 @@ alias gs='git status'
 alias grh='git reset --hard HEAD'
 alias q='quilt'
 
+export PAGER="less -XFRS"
+export ACK_PAGER="$PAGER"
+
 # git uses /usr/bin/editor by default, which in Ubuntu points to nano by
 # default.
 export EDITOR="vim"
