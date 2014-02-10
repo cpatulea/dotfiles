@@ -4,3 +4,4 @@
 --type-set=go=.go
 --type-set=make2=.mk
 --type-set=patch=.patch
+--type-set=python=.pi
