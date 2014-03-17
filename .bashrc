@@ -142,6 +142,8 @@ alias q='quilt'
 # default.
 export EDITOR="vim"
 
+export PATH="$PATH:$HOME/bin"
+
 export PYTHONPATH="$HOME/src/scrapy:$HOME/src/w3lib:$HOME/src/queuelib"
 [ -d $HOME/src/go ] && {
   export GOROOT="$HOME/src/go"
