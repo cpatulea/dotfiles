@@ -143,9 +143,11 @@ alias q='quilt'
 export EDITOR="vim"
 
 export PYTHONPATH="$HOME/src/scrapy:$HOME/src/w3lib:$HOME/src/queuelib"
-export GOROOT="$HOME/src/go"
-export PATH="$PATH:$GOROOT/bin"
-export GOPATH="$HOME/src/gopath"
+[ -d $HOME/src/go ] && {
+  export GOROOT="$HOME/src/go"
+  export PATH="$PATH:$GOROOT/bin"
+  export GOPATH="$HOME/src/gopath"
+}
 
 [ -s $HOME/.bashrc_local ] && . $HOME/.bashrc_local
 
