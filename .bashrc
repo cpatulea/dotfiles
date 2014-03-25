@@ -144,10 +144,12 @@ export EDITOR="vim"
 
 export PATH="$PATH:$HOME/bin"
 
-export PYTHONPATH="$HOME/src/scrapy:$HOME/src/w3lib:$HOME/src/queuelib"
-export GOROOT="$HOME/src/go"
-export PATH="$HOME/bin:$PATH:$GOROOT/bin"
-export GOPATH="$HOME/src/gopath"
+export PYTHONPATH="$HOME/src/trac:$HOME/src/genshi:$HOME/src/scrapy:$HOME/src/w3lib:$HOME/src/queuelib"
+[ -d $HOME/src/go ] && {
+  export GOROOT="$HOME/src/go"
+  export PATH="$HOME/bin:$PATH:$GOROOT/bin"
+  export GOPATH="$HOME/src/gopath"
+}
 
 [ -s $HOME/.bashrc_local ] && . $HOME/.bashrc_local
 
