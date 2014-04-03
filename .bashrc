@@ -156,6 +156,7 @@ alias gs='git status'
 alias grh='git reset --hard HEAD'
 alias q='quilt'
 
+export LESS="-M"
 export PAGER="less -XFRS"
 export ACK_PAGER="$PAGER"
 
