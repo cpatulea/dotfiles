@@ -147,7 +147,7 @@ export PATH="$PATH:$HOME/bin"
 export PYTHONPATH="$HOME/src/trac:$HOME/src/genshi:$HOME/src/scrapy:$HOME/src/w3lib:$HOME/src/queuelib"
 [ -d $HOME/src/go ] && {
   export GOROOT="$HOME/src/go"
-  export PATH="$PATH:$GOROOT/bin"
+  export PATH="$GOROOT/bin:$PATH"
   export GOPATH="$HOME/src/gopath"
 }
 
