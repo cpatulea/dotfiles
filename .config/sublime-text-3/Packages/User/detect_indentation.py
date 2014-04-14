@@ -1,6 +1,12 @@
 import sublime, sublime_plugin
 from functools import partial
 
+def snap(snaps, value):
+    for current_snap in snaps:
+        if value <= current_snap:
+            return current_snap
+    raise ValueError('Value %d larger than largest snap in %r' % (value, snaps))
+
 class DetectIndentationCommand(sublime_plugin.TextCommand):
     """Examines the contents of the buffer to determine the indentation
     settings."""
@@ -11,12 +17,21 @@ class DetectIndentationCommand(sublime_plugin.TextCommand):
         starts_with_tab = 0
         spaces_list = []
         indented_lines = 0
+        spaces_within_tabs_freq = [0] * 9
 
         for line in sample.split("\n"):
             if not line: continue
             if line[0] == "\t":
                 starts_with_tab += 1
                 indented_lines += 1
+
+                spaces_within_tabs = 0
+                for ch in line:
+                    if ch == "\t": continue
+                    elif ch == " ": spaces_within_tabs += 1
+                    else: break
+                spaces_within_tabs_freq[snap([0, 2, 4, 8], spaces_within_tabs % 8)] += 1
+
             elif line.startswith(' '):
                 spaces = 0
                 for ch in line:
@@ -51,9 +66,18 @@ class DetectIndentationCommand(sublime_plugin.TextCommand):
                         return
 
             elif starts_with_tab >= 0.8 * indented_lines:
+                while spaces_within_tabs_freq[-1] == 0:
+                    spaces_within_tabs_freq.pop()
+                indent = len(spaces_within_tabs_freq) - 1
+
                 if show_message:
-                    sublime.status_message("Detect Indentation: Setting indentation to tabs")
+                    sublime.status_message("Detect Indentation: Setting indentation to tabs "
+                        "(size = %d)" % indent)
+
                 self.view.settings().set('translate_tabs_to_spaces', False)
+                if indent:
+                    self.view.settings().set('tab_size', indent)
+                return
 
 class DetectIndentationEventListener(sublime_plugin.EventListener):
     def on_load(self, view):
