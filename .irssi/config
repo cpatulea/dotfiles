@@ -1,0 +1,99 @@
+servers = (
+  {
+    address = "dickson.freenode.net";
+    port = "6697";
+    use_ssl = "yes";
+    ssl_verify = "no";
+    chatnet = "Freenode";
+    autoconnect = "yes";
+  },
+  {
+    address = "irc.oftc.net";
+    port = "6697";
+    use_ssl = "yes";
+    ssl_verify = "no";
+    chatnet = "OFTC";
+  }
+);
+
+aliases = {
+  J = "join";
+  WJOIN = "join -window";
+  WQUERY = "query -window";
+  LEAVE = "part";
+  BYE = "quit";
+  EXIT = "quit";
+  SIGNOFF = "quit";
+  DESCRIBE = "action";
+  DATE = "time";
+  HOST = "userhost";
+  LAST = "lastlog";
+  SAY = "msg *";
+  WI = "whois";
+  WII = "whois $0 $0";
+  WW = "whowas";
+  W = "who";
+  N = "names";
+  M = "msg";
+  T = "topic";
+  C = "clear";
+  CL = "clear";
+  K = "kick";
+  KB = "kickban";
+  KN = "knockout";
+  BANS = "ban";
+  B = "ban";
+  MUB = "unban *";
+  UB = "unban";
+  IG = "ignore";
+  UNIG = "unignore";
+  SB = "scrollback";
+  UMODE = "mode $N";
+  WC = "window close";
+  WN = "window new hide";
+  SV = "say Irssi $J ($V) - http://irssi.org/";
+  GOTO = "sb goto";
+  CHAT = "dcc chat";
+  RUN = "SCRIPT LOAD";
+  CALC = "exec - if command -v bc >/dev/null 2>&1\\; then printf '%s=' '$*'\\; echo '$*' | bc -l\\; else echo bc was not found\\; fi";
+  SBAR = "STATUSBAR";
+  INVITELIST = "mode $C +I";
+  Q = "QUERY";
+  "MANUAL-WINDOWS" = "set use_status_window off;set autocreate_windows off;set autocreate_query_level none;set autoclose_windows off;set reuse_unused_windows on;save";
+  EXEMPTLIST = "mode $C +e";
+  ATAG = "WINDOW SERVER";
+  UNSET = "set -clear";
+  RESET = "set -default";
+};
+
+settings = {
+  core = { real_name = "eigma"; user_name = "eigma"; nick = "eigma"; };
+  "fe-text" = { actlist_sort = "refnum"; };
+  "fe-common/core" = {
+    autolog_path = "~/.irssi/logs/$tag/$0.log";
+    autolog = "yes";
+  };
+};
+logs = { };
+ignores = (
+  { level = "JOINS PARTS QUITS"; channels = ( "#openwrt-devel" ); },
+  { level = "JOINS PARTS QUITS"; channels = ( "#openwrt" ); },
+  {
+    mask = "builder*!*@*";
+    level = "ALL";
+    channels = ( "#openwrt-devel" );
+  }
+);
+channels = (
+  { name = "#engsoc"; chatnet = "OFTC"; autojoin = "yes"; },
+  { name = "#openwrt"; chatnet = "Freenode"; autojoin = "yes"; },
+  { name = "#openwrt-devel"; chatnet = "Freenode"; autojoin = "yes"; }
+);
+
+chatnets = {
+  Freenode = {
+    type = "IRC";
+    autosendcmd = "/script load identify.pl;/script unload identify.pl";
+  };
+  OFTC = { type = "IRC"; };
+};
