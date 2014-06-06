@@ -138,6 +138,10 @@ alias gs='git status'
 alias grh='git reset --hard HEAD'
 alias q='quilt'
 
+export LESS="-M"
+export PAGER="less -XFRS"
+export ACK_PAGER="$PAGER"
+
 # git uses /usr/bin/editor by default, which in Ubuntu points to nano by
 # default.
 export EDITOR="vim"
@@ -150,6 +154,8 @@ export PYTHONPATH="$HOME/src/trac:$HOME/src/genshi:$HOME/src/scrapy:$HOME/src/w3
   export PATH="$HOME/bin:$PATH:$GOROOT/bin"
   export GOPATH="$HOME/src/gopath"
 }
+
+export SSHFS='-o auto_cache,intr,umask=0077,sshfs_debug'
 
 [ -s $HOME/.bashrc_local ] && . $HOME/.bashrc_local
 
