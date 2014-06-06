@@ -1,5 +1,7 @@
 [extensions]
 hgext.patchbomb =
+hgext.crecord = /home/ubuntu/src/crecord/crecord
+codereview = $GOROOT/lib/codereview/codereview.py
 
 [ui]
 username = Catalin Patulea <cat@vv.carleton.ca>
