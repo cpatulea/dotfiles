@@ -1,0 +1,9 @@
+[
+  { "keys": ["ctrl+alt+pageup"] },
+  { "keys": ["ctrl+alt+pagedown"] },
+
+  { "keys": ["ctrl+shift+pageup"], "command": "reorder_tabs", "args": {"relative": -1} },
+  { "keys": ["ctrl+shift+pagedown"], "command": "reorder_tabs", "args": {"relative": 1} },
+
+  { "keys": ["ctrl+alt+w"], "command": "toggle_setting", "args": {"setting": "word_wrap"} }
+]
