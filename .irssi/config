@@ -68,7 +68,12 @@ aliases = {
 };
 
 settings = {
-  core = { real_name = "eigma"; user_name = "eigma"; nick = "eigma"; };
+  core = {
+    real_name = "eigma";
+    user_name = "eigma";
+    nick = "eigma";
+    settings_autosave = "no";
+  };
   "fe-text" = { actlist_sort = "refnum"; };
   "fe-common/core" = {
     autolog_path = "~/.irssi/logs/$tag/$0.log";
