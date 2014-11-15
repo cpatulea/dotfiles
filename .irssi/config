@@ -5,7 +5,7 @@ servers = (
     use_ssl = "yes";
     ssl_verify = "no";
     chatnet = "Freenode";
-    autoconnect = "yes";
+    autoconnect = "no";
   },
   {
     address = "irc.oftc.net";
@@ -13,6 +13,7 @@ servers = (
     use_ssl = "yes";
     ssl_verify = "no";
     chatnet = "OFTC";
+    autoconnect = "no";
   }
 );
 
