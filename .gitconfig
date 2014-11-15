@@ -1,6 +1,6 @@
 [user]
   name = Catalin Patulea
-  email = cat@vv.carleton.ca
+  email = catalinp@google.com
 [alias]
   l = "log --stat --graph -M"
 [log]
