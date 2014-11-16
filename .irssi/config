@@ -73,6 +73,7 @@ settings = {
     user_name = "eigma";
     nick = "eigma";
     settings_autosave = "no";
+    server_reconnect_time = "5";
   };
   "fe-text" = { actlist_sort = "refnum"; };
   "fe-common/core" = {
