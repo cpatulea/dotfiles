@@ -8,7 +8,7 @@ servers = (
     autoconnect = "no";
   },
   {
-    address = "irc.oftc.net";
+    address = "207.192.72.99";  # weber.oftc.net
     port = "6697";
     use_ssl = "yes";
     ssl_verify = "no";
@@ -86,10 +86,12 @@ ignores = (
   { level = "JOINS PARTS QUITS"; channels = ( "#openwrt-devel" ); },
   { level = "JOINS PARTS QUITS"; channels = ( "#openwrt" ); },
   {
-    mask = "builder*!*@*";
+    mask = "*!*builder@*";
     level = "ALL";
     channels = ( "#openwrt-devel" );
-  }
+  },
+  { level = "JOINS PARTS QUITS"; channels = ( "##foulab" ); }
+  { level = "JOINS PARTS QUITS"; channels = ( "#reseaulibre" ); }
 );
 channels = (
   { name = "#engsoc"; chatnet = "OFTC"; autojoin = "yes"; },
