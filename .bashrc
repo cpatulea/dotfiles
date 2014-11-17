@@ -152,8 +152,7 @@ export PATH="$PATH:$HOME/bin"
 # $ python setup.py develop --user
 export PYTHONPATH="$HOME/src/w3lib:$HOME/src/queuelib"
 [ -d $HOME/src/go ] && {
-  export GOROOT="$HOME/src/go"
-  export PATH="$HOME/bin:$PATH:$GOROOT/bin"
+  export PATH="$HOME/bin:$GOROOT/bin:$PATH"
   export GOPATH="$HOME/src/gopath"
 }
 
