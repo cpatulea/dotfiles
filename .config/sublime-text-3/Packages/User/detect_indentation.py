@@ -26,10 +26,8 @@ class DetectIndentationCommand(sublime_plugin.TextCommand):
                 indented_lines += 1
 
                 spaces_within_tabs = 0
-                for ch in line:
-                    if ch == "\t": continue
-                    elif ch == " ": spaces_within_tabs += 1
-                    else: break
+                line = line.lstrip("\t")
+                spaces_within_tabs = len(line) - len(line.lstrip(" "))
                 spaces_within_tabs_freq[snap([0, 2, 4, 8], spaces_within_tabs % 8)] += 1
 
             elif line.startswith(' '):
@@ -78,6 +76,18 @@ class DetectIndentationCommand(sublime_plugin.TextCommand):
                 if indent:
                     self.view.settings().set('tab_size', indent)
                 return
+
+            else:
+                print("spaces_list: %d" % len(spaces_list))
+                print("starts_with_tab: %d" % starts_with_tab)
+
+                while spaces_within_tabs_freq[-1] == 0:
+                    spaces_within_tabs_freq.pop()
+                indent = len(spaces_within_tabs_freq) - 1
+                if indent:
+                    sublime.status_message("Detect Indentation: Inconclusive, "
+                        "but going with tab size %d" % indent)
+                    self.view.settings().set('tab_size', indent)
 
 class DetectIndentationEventListener(sublime_plugin.EventListener):
     def on_load(self, view):
