@@ -1,0 +1,29 @@
+/* gnome-terminal */
+TerminalScreen {
+    background-color: #300a24;
+
+    color: #fff;
+}
+
+TerminalWindow,
+TerminalWindow.background {
+    background-color: #300a24;
+}
+
+/* notebook */
+TerminalWindow .notebook {
+    background-color: #300a24;
+    color: #fff;
+}
+
+TerminalWindow .notebook tab {
+}
+
+TerminalWindow .notebook tab:active {
+    background-color: #300a24;
+}
+
+TerminalWindow .notebook .button,
+TerminalWindow .notebook .button:active  {
+    color: #ccc;
+}
