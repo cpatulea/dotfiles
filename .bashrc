@@ -138,7 +138,7 @@ alias gs='git status'
 alias grh='git reset --hard HEAD'
 alias q='quilt'
 
-export LESS="-M"
+export LESS="-IRSM"
 export PAGER="less -XFRS"
 export ACK_PAGER="$PAGER"
 
@@ -164,5 +164,3 @@ false && [ -d /usr/local/plan9 ] && {
   export PLAN9=/usr/local/plan9
   export PATH=$PATH:$PLAN9/bin
 }
-
-export LESS="-IRSM"
