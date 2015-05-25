@@ -1,6 +1,6 @@
 servers = (
   {
-    address = "dickson.freenode.net";
+    address = "tepper.freenode.net";
     port = "6697";
     use_ssl = "yes";
     ssl_verify = "no";
@@ -8,7 +8,7 @@ servers = (
     autoconnect = "yes";
   },
   {
-    address = "207.192.72.99";  # weber.oftc.net
+    address = "irc.oftc.net";
     port = "6697";
     use_ssl = "yes";
     ssl_verify = "no";
@@ -84,8 +84,10 @@ ignores = (
     level = "ALL";
     channels = ( "#openwrt-devel" );
   },
-  { level = "JOINS PARTS QUITS"; channels = ( "##foulab" ); }
-  { level = "JOINS PARTS QUITS"; channels = ( "#reseaulibre" ); }
+  { level = "JOINS PARTS QUITS"; channels = ( "##foulab" ); },
+  { level = "JOINS PARTS QUITS"; channels = ( "#reseaulibre" ); },
+  { level = "JOINS PARTS QUITS"; channels = ( "#csaw" ); },
+  { level = "JOINS PARTS QUITS"; channels = ( "#docker" ); }
 );
 channels = (
   { name = "#engsoc"; chatnet = "OFTC"; autojoin = "yes"; },
