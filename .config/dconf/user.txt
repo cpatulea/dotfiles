@@ -1,0 +1,3 @@
+[org/gnome/nautilus/preferences]
+# Start searching when typing in a file picker dialog.
+enable-interactive-search=true

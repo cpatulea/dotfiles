@@ -1,0 +1,48 @@
+/* gnome-terminal */
+TerminalScreen {
+    background-color: #300a24;
+}
+
+TerminalWindow,
+TerminalWindow.background {
+    background-color: #300a24;
+}
+
+/* notebook */
+TerminalWindow .notebook {
+    background-color: #300a24;
+    color: #999;
+}
+
+TerminalWindow .notebook.header {
+    padding-bottom: 1px;
+}
+
+TerminalWindow .notebook tab.top {
+    border-image: -gtk-gradient (linear, left top, left bottom,
+                                 from (alpha (shade (@bg_color, 0.9), 0.0)),
+                                 to (shade (@bg_color, 0.9))) 1;
+    border-image-width: 1px 1px;
+
+    border-left: 1px;
+    border-right: 1px;
+    border-bottom: 1px;
+}
+
+TerminalWindow .notebook tab.top:active {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  border-bottom: none;
+}
+
+TerminalWindow .notebook tab:active {
+    //background-color: #f00;  /* works */
+}
+
+TerminalWindow .notebook .active-page GtkLabel {
+    color: #fff;
+}
+
+TerminalWindow .notebook .button {
+    color: #ccc;
+}

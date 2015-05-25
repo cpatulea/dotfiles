@@ -22,7 +22,10 @@ $HOME/.ssh/agent)
 esac
 
 # If not running interactively, don't do anything
-[ -z "$PS1" ] && return
+case $- in
+    *i*) ;;
+      *) return;;
+esac
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -47,7 +50,7 @@ shopt -s checkwinsize
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
@@ -85,8 +88,12 @@ fi
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
+  fi
 fi
 
 # Prompt
@@ -102,13 +109,16 @@ if ! type -t tac &>/dev/null; then
   }
 fi
 
-PS1="$PS1\$(dirs -p | tac | tr '\n' ' ' | sed 's/ $//')"
+PS1="$PS1\h:"
+
+export PROMPT_COMMAND='_DIRS="$(dirs -p | ~/bin/format-dirs.sh)"'
+PS1="$PS1\$_DIRS"
 
 case "$TERM" in
 linux|xterm*|screen)
   PS1="$PS1\[\e[1;32m\]\$\[\e[0m\] "
 
-   if [[ "$TERM" = xterm || "$TERM" = screen ]]; then
+  if [[ "$TERM" = xterm || "$TERM" = screen ]]; then
     PS1="\[\e]0;\h:\w\a\]$PS1"
   fi
   ;;
@@ -171,7 +181,7 @@ export PATH="$PATH:$HOME/bin:/opt/google_appengine"
 # $ python setup.py develop --user
 export PYTHONPATH="$HOME/src/w3lib:$HOME/src/queuelib"
 [ -d $HOME/src/go ] && {
-  export PATH="$HOME/bin:$PATH:$GOROOT/bin"
+  export PATH="$HOME/bin:$GOROOT/bin:$PATH"
   export GOPATH="$HOME/src/gopath"
 }
 
@@ -183,3 +193,8 @@ false && [ -d /usr/local/plan9 ] && {
   export PLAN9=/usr/local/plan9
   export PATH=$PATH:$PLAN9/bin
 }
+
+alias ag='ag --color-match="1;31" --pager="$PAGER"'
+
+# Keep certain dconf/gsettings in git.
+export DCONF_PROFILE=$HOME/.config/dconf/profile
