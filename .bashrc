@@ -165,7 +165,7 @@ export ACK_PAGER="$PAGER"
 # default.
 export EDITOR="vim"
 
-export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:$HOME/bin:/opt/google_appengine"
 
 # Install working copies using:
 # $ python setup.py develop --user
