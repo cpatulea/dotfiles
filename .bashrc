@@ -90,7 +90,10 @@ if ! type -t tac &>/dev/null; then
   }
 fi
 
-PS1="$PS1\$(dirs -p | tac | tr '\n' ' ' | sed 's/ $//')"
+PS1="$PS1\h:"
+
+export PROMPT_COMMAND='_DIRS="$(dirs -p | ~/bin/format-dirs.sh)"'
+PS1="$PS1\$_DIRS"
 
 case "$TERM" in
 linux|xterm*|screen)
