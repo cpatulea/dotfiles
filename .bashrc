@@ -99,7 +99,7 @@ case "$TERM" in
 linux|xterm*|screen)
   PS1="$PS1\[\e[1;32m\]\$\[\e[0m\] "
 
-   if [[ "$TERM" = xterm || "$TERM" = screen ]]; then
+  if [[ "$TERM" = xterm || "$TERM" = screen ]]; then
     PS1="\[\e]0;\h:\w\a\]$PS1"
   fi
   ;;
