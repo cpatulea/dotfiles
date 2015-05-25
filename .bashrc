@@ -2,6 +2,25 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+case "$SSH_AUTH_SOCK" in
+"")
+  ;;
+/tmp/ssh-*/agent.*)
+  [[ -e "$SSH_AUTH_SOCK" ]] && {
+    ln -sf "$SSH_AUTH_SOCK" "$HOME/.ssh/agent"
+  } || {
+    echo "warning: SSH_AUTH_SOCK \"$SSH_AUTH_SOCK\" does not exist" >&2
+  }
+  export SSH_AUTH_SOCK="$HOME/.ssh/agent"
+  ;;
+$HOME/.ssh/agent)
+  # already pointing to home
+  ;;
+*)
+  echo "warning: strange SSH_AUTH_SOCK \"$SSH_AUTH_SOCK\"" >&2
+  ;;
+esac
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
