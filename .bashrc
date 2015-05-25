@@ -177,3 +177,6 @@ false && [ -d /usr/local/plan9 ] && {
 
 export LESS="-IRSM"
 alias ag='ag --color-match="1;31" --pager="$PAGER"'
+
+# Keep certain dconf/gsettings in git.
+export DCONF_PROFILE=$HOME/.config/dconf/profile
