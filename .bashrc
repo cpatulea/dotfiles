@@ -2,6 +2,25 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+case "$SSH_AUTH_SOCK" in
+"")
+  ;;
+/tmp/ssh-*/agent.*)
+  [[ -e "$SSH_AUTH_SOCK" ]] && {
+    ln -sf "$SSH_AUTH_SOCK" "$HOME/.ssh/agent"
+  } || {
+    echo "warning: SSH_AUTH_SOCK \"$SSH_AUTH_SOCK\" does not exist" >&2
+  }
+  export SSH_AUTH_SOCK="$HOME/.ssh/agent"
+  ;;
+$HOME/.ssh/agent)
+  # already pointing to home
+  ;;
+*)
+  echo "warning: strange SSH_AUTH_SOCK \"$SSH_AUTH_SOCK\"" >&2
+  ;;
+esac
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -90,13 +109,16 @@ if ! type -t tac &>/dev/null; then
   }
 fi
 
-PS1="$PS1\$(dirs -p | tac | tr '\n' ' ' | sed 's/ $//')"
+PS1="$PS1\h:"
+
+export PROMPT_COMMAND='_DIRS="$(dirs -p | ~/bin/format-dirs.sh)"'
+PS1="$PS1\$_DIRS"
 
 case "$TERM" in
 linux|xterm*|screen)
   PS1="$PS1\[\e[1;32m\]\$\[\e[0m\] "
 
-   if [[ "$TERM" = xterm || "$TERM" = screen ]]; then
+  if [[ "$TERM" = xterm || "$TERM" = screen ]]; then
     PS1="\[\e]0;\h:\w\a\]$PS1"
   fi
   ;;
@@ -145,7 +167,7 @@ alias gs='git status'
 alias grh='git reset --hard HEAD'
 alias q='quilt'
 
-export LESS="-M"
+export LESS="-IRSM"
 export PAGER="less -XFRS"
 export ACK_PAGER="$PAGER"
 
@@ -153,7 +175,7 @@ export ACK_PAGER="$PAGER"
 # default.
 export EDITOR="vim"
 
-export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:$HOME/bin:/opt/google_appengine"
 
 # Install working copies using:
 # $ python setup.py develop --user
@@ -176,3 +198,7 @@ export LESS="-IRSM"
 export LIBOVERLAY_SCROLLBAR=0
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+alias ag='ag --color-match="1;31" --pager="$PAGER"'
+
+# Keep certain dconf/gsettings in git.
+export DCONF_PROFILE=$HOME/.config/dconf/profile
