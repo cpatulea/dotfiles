@@ -173,3 +173,4 @@ false && [ -d /usr/local/plan9 ] && {
 }
 
 export LESS="-IRSM"
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
